@@ -2,11 +2,12 @@
 
 Welcome to R!  For this introductory workshop, we will be using R Markdown.  This might take a bit of getting used to it, but it is a great way to run R code and make comments so you know what you did!!
 
-First thing that you will need to do is install the packages you need.  The data set, as well as many of the commands is in a library called survival (good name, right!).  We will also be using a powerful graphing software called ggplot (boy, we could have up to 5 workshops on this and still only scratch the surface of what this can do!).
+First thing that you will need to do is install the packages you need.  The data set, as well as many of the commands is in a library called survival (good name, right!).  We will also be using a powerful graphing software called ggplot (boy, we could have up to 5 workshops on this and still only scratch the surface of what this can do!) and a few extra libraries to make things look nice.
 
 First, in the console, you will need to install the packages onto your local drive.  To do so, type the commands:  \
 **install.packages("survival")**  \
 **install.packages("ggplot2")**  \
+**install.packages("gridExtra")**  \
 
 You will only need to do this once.  Once they have been installed, you now have them on your local drive.
 
@@ -16,6 +17,7 @@ Now let's open a new R Markdown notebook.  Go to File -> New File -> R Markdown.
 
 library(survival)
 library(ggplot2)
+library(gridExtra)
 
 ```
 
@@ -34,6 +36,23 @@ You can see how many variables you have, the range of each variable and how many
 ```{r status variable}
 
 ggplot(lung,aes(x=factor(status)))+ geom_bar(stat="count", fill="blue")
+
+
+```
+Just a little more exploration (if you are doing an analysis, you should explore more than this!).
+
+```{r other plots,warning=FALSE}
+
+p1<-ggplot(lung,aes(x=factor(status),y=time)) + geom_boxplot()
+p2<-ggplot(lung, aes(x=factor(status),y=age)) + geom_boxplot()
+p3<-ggplot(lung, aes(x=factor(status),y=ph.karno)) + geom_boxplot()
+p4<-ggplot(lung, aes(x=factor(status),y=pat.karno)) + geom_boxplot()
+p5<-ggplot(lung, aes(x=factor(status),y=meal.cal)) + geom_boxplot()
+p6<-ggplot(lung, aes(x=factor(status),y=wt.loss)) + geom_boxplot()
+grid.arrange(p1, p2, p3, p4, p5, p6, nrow = 3)
+
+ggplot(lung, aes(x=factor(status),fill = factor(ph.ecog))) +
+  geom_bar(position="fill")
 
 ```
 

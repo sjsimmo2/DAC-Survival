@@ -161,15 +161,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="setting-up-r" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Setting up R<a href="setting-up-r.html#setting-up-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Welcome to R! For this introductory workshop, we will be using R Markdown. This might take a bit of getting used to it, but it is a great way to run R code and make comments so you know what you did!!</p>
-<p>First thing that you will need to do is install the packages you need. The data set, as well as many of the commands is in a library called survival (good name, right!). We will also be using a powerful graphing software called ggplot (boy, we could have up to 5 workshops on this and still only scratch the surface of what this can do!).</p>
+<p>First thing that you will need to do is install the packages you need. The data set, as well as many of the commands is in a library called survival (good name, right!). We will also be using a powerful graphing software called ggplot (boy, we could have up to 5 workshops on this and still only scratch the surface of what this can do!) and a few extra libraries to make things look nice.</p>
 <p>First, in the console, you will need to install the packages onto your local drive. To do so, type the commands:<br />
 <strong>install.packages(“survival”)</strong><br />
 <strong>install.packages(“ggplot2”)</strong><br />
+<strong>install.packages(“gridExtra”)</strong><br />
 </p>
 <p>You will only need to do this once. Once they have been installed, you now have them on your local drive.</p>
 <p>Now let’s open a new R Markdown notebook. Go to File -&gt; New File -&gt; R Markdown… This will open an R Markdown file for you. Go ahead and run some of the “R Chunks” to see what is going on here. After you are comfortable, let’s change the first chunk to do what we need it to do. We will need to library the survival and ggplot2 package. See below for code to do this. Everytime you open this document, and want to run the codes contained within, you will need to do these commands first.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setting-up-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb1-2"><a href="setting-up-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<span id="cb1-2"><a href="setting-up-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="setting-up-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
 <p>Be sure to hit the little green run button in the right hand corner to run this code. Feel free to put comments before or after this chunk to let you know what you just did!!<br />
 </p>
 <p>Now let’s explore the data set we will be using (as any good data scientist, you must KNOW your data first!!). Go ahead and ask for a summary of the data set lung.</p>
@@ -200,7 +202,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  NA&#39;s   :47       NA&#39;s   :14</code></pre>
 <p>You can see how many variables you have, the range of each variable and how many NA’s there are (NA’s can be a problem in some analyses). Let’s take a look at a bar plot for status.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="setting-up-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lung,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status)))<span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>, <span class="at">fill=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/status%20variable-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/status%20variable-1.png" width="672" />
+Just a little more exploration (if you are doing an analysis, you should explore more than this!).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="setting-up-r.html#cb5-1" aria-hidden="true" tabindex="-1"></a>p1<span class="ot">&lt;-</span><span class="fu">ggplot</span>(lung,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status),<span class="at">y=</span>time)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
+<span id="cb5-2"><a href="setting-up-r.html#cb5-2" aria-hidden="true" tabindex="-1"></a>p2<span class="ot">&lt;-</span><span class="fu">ggplot</span>(lung, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status),<span class="at">y=</span>age)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
+<span id="cb5-3"><a href="setting-up-r.html#cb5-3" aria-hidden="true" tabindex="-1"></a>p3<span class="ot">&lt;-</span><span class="fu">ggplot</span>(lung, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status),<span class="at">y=</span>ph.karno)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
+<span id="cb5-4"><a href="setting-up-r.html#cb5-4" aria-hidden="true" tabindex="-1"></a>p4<span class="ot">&lt;-</span><span class="fu">ggplot</span>(lung, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status),<span class="at">y=</span>pat.karno)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
+<span id="cb5-5"><a href="setting-up-r.html#cb5-5" aria-hidden="true" tabindex="-1"></a>p5<span class="ot">&lt;-</span><span class="fu">ggplot</span>(lung, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status),<span class="at">y=</span>meal.cal)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
+<span id="cb5-6"><a href="setting-up-r.html#cb5-6" aria-hidden="true" tabindex="-1"></a>p6<span class="ot">&lt;-</span><span class="fu">ggplot</span>(lung, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status),<span class="at">y=</span>wt.loss)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span>
+<span id="cb5-7"><a href="setting-up-r.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, p4, p5, p6, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/other%20plots-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="setting-up-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lung, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status),<span class="at">fill =</span> <span class="fu">factor</span>(ph.ecog))) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="setting-up-r.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;fill&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/other%20plots-2.png" width="672" /></p>
 
 </div>
             </section>
