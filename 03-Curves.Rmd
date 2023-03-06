@@ -1,0 +1,14 @@
+# Visualizing survival curves
+
+Let's first look at our little survival data (to see how this works) and then we will look at the actual data.  \
+
+The following code creates the data:
+
+```{r little data}
+
+simple=data.frame(matrix(c(7,8,10,3,2,3,1,1,0,1,1,0),ncol=2))
+colnames(simple)=c("tenure","censored")
+simple
+
+```
+
