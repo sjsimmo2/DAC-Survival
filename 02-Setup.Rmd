@@ -1,0 +1,24 @@
+# Setting up R
+
+Welcome to R!  For this introductory workshop, we will be using R Markdown.  This might take a bit of getting used to it, but it is a great way to run R code and make comments so you know what you did!!
+
+First thing that you will need to do is install the packages you need.  The data set, as well as many of the commands is in a library called survival (good name, right!).  We will also be using a powerful graphing software called ggplot (boy, we could have up to 5 workshops on this and still only scratch the surface of what this can do!).
+
+First, in the console, you will need to install the packages onto your local drive.  To do so, type the commands:  \
+**install.packages("survival")**  \
+**install.packages("ggplot2")**  \
+
+You will only need to do this once.  Once they have been installed, you now have them on your local drive.
+
+Now let's open a new R Markdown notebook.  Go to File -> New File -> R Markdown...  This will open an R Markdown file for you.  Go ahead and run some of the "R Chunks" to see what is going on here.  After you are comfortable, let's change the first chunk to do what we need it to do.  We will need to library the survival and ggplot2 package.  See below for code to do this.  Everytime you open this document, and want to run the codes contained within, you will need to do these commands first.
+
+```{r get libraries,message=FALSE}
+
+library(survival)
+library(ggplot2)
+
+```
+
+
+
+
