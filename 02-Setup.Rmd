@@ -19,6 +19,21 @@ library(ggplot2)
 
 ```
 
+Be sure to hit the little green run button in the right hand corner to run this code. Feel free to put comments before or after this chunk to let you know what you just did!!  \
+
+Now let's explore the data set we will be using (as any good data scientist, you must KNOW your data first!!).  Go ahead and ask for a summary of the data set lung.
+
+```{r data set}
+summary(lung)
+
+```
 
 
+You can see how many variables you have, the range of each variable and how many NA's there are (NA's can be a problem in some analyses). Let's take a look at a bar plot for status.
+
+```{r status variable}
+
+ggplot(lung,aes(x=factor(status)))+ geom_bar(stat="count", fill="blue")
+
+```
 

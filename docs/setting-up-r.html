@@ -170,6 +170,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now let’s open a new R Markdown notebook. Go to File -&gt; New File -&gt; R Markdown… This will open an R Markdown file for you. Go ahead and run some of the “R Chunks” to see what is going on here. After you are comfortable, let’s change the first chunk to do what we need it to do. We will need to library the survival and ggplot2 package. See below for code to do this. Everytime you open this document, and want to run the codes contained within, you will need to do these commands first.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setting-up-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
 <span id="cb1-2"><a href="setting-up-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>Be sure to hit the little green run button in the right hand corner to run this code. Feel free to put comments before or after this chunk to let you know what you just did!!<br />
+</p>
+<p>Now let’s explore the data set we will be using (as any good data scientist, you must KNOW your data first!!). Go ahead and ask for a summary of the data set lung.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="setting-up-r.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lung)</span></code></pre></div>
+<pre><code>##       inst            time            status           age       
+##  Min.   : 1.00   Min.   :   5.0   Min.   :1.000   Min.   :39.00  
+##  1st Qu.: 3.00   1st Qu.: 166.8   1st Qu.:1.000   1st Qu.:56.00  
+##  Median :11.00   Median : 255.5   Median :2.000   Median :63.00  
+##  Mean   :11.09   Mean   : 305.2   Mean   :1.724   Mean   :62.45  
+##  3rd Qu.:16.00   3rd Qu.: 396.5   3rd Qu.:2.000   3rd Qu.:69.00  
+##  Max.   :33.00   Max.   :1022.0   Max.   :2.000   Max.   :82.00  
+##  NA&#39;s   :1                                                       
+##       sex           ph.ecog          ph.karno        pat.karno     
+##  Min.   :1.000   Min.   :0.0000   Min.   : 50.00   Min.   : 30.00  
+##  1st Qu.:1.000   1st Qu.:0.0000   1st Qu.: 75.00   1st Qu.: 70.00  
+##  Median :1.000   Median :1.0000   Median : 80.00   Median : 80.00  
+##  Mean   :1.395   Mean   :0.9515   Mean   : 81.94   Mean   : 79.96  
+##  3rd Qu.:2.000   3rd Qu.:1.0000   3rd Qu.: 90.00   3rd Qu.: 90.00  
+##  Max.   :2.000   Max.   :3.0000   Max.   :100.00   Max.   :100.00  
+##                  NA&#39;s   :1        NA&#39;s   :1        NA&#39;s   :3       
+##     meal.cal         wt.loss       
+##  Min.   :  96.0   Min.   :-24.000  
+##  1st Qu.: 635.0   1st Qu.:  0.000  
+##  Median : 975.0   Median :  7.000  
+##  Mean   : 928.8   Mean   :  9.832  
+##  3rd Qu.:1150.0   3rd Qu.: 15.750  
+##  Max.   :2600.0   Max.   : 68.000  
+##  NA&#39;s   :47       NA&#39;s   :14</code></pre>
+<p>You can see how many variables you have, the range of each variable and how many NA’s there are (NA’s can be a problem in some analyses). Let’s take a look at a bar plot for status.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="setting-up-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lung,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(status)))<span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>, <span class="at">fill=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/status%20variable-1.png" width="672" /></p>
 
 </div>
             </section>
