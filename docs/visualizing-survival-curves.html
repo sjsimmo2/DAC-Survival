@@ -173,6 +173,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4      3        1
 ## 5      2        1
 ## 6      3        0</code></pre>
+<p>To calculate the survival probabilities, we will use the survfit command.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="visualizing-survival-curves.html#cb3-1" aria-hidden="true" tabindex="-1"></a>simple_km<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(tenure, censored<span class="sc">==</span><span class="dv">1</span>)<span class="sc">~</span><span class="dv">1</span>,                      <span class="at">data =</span> simple)</span>
+<span id="cb3-2"><a href="visualizing-survival-curves.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(simple_km)</span></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(tenure, censored == 1) ~ 1, data = simple)
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     2      6       1    0.833   0.152       0.5827            1
+##     3      5       1    0.667   0.192       0.3786            1
+##     7      3       1    0.444   0.222       0.1668            1
+##     8      2       1    0.222   0.192       0.0407            1</code></pre>
 
 </div>
             </section>

@@ -1,5 +1,14 @@
 # Visualizing survival curves
 
+```{r, include =FALSE}
+library(survival)
+library(ggplot2)
+library(gridExtra)
+#library(survminer)
+
+```
+
+
 Let's first look at our little survival data (to see how this works) and then we will look at the actual data.  \
 
 The following code creates the data:
@@ -9,6 +18,16 @@ The following code creates the data:
 simple=data.frame(matrix(c(7,8,10,3,2,3,1,1,0,1,1,0),ncol=2))
 colnames(simple)=c("tenure","censored")
 simple
+
+```
+
+
+To calculate the survival probabilities, we will use the survfit command.
+
+```{r survival probabilities}
+
+simple_km=survfit(Surv(tenure, censored==1)~1,                      data = simple)
+summary(simple_km)
 
 ```
 
