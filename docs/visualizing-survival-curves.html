@@ -204,6 +204,9 @@ Ok, so now let’s get to the real data:</p>
 ## sex=2  90       53     73.4      5.68      10.3
 ## 
 ##  Chisq= 10.3  on 1 degrees of freedom, p= 0.001</code></pre>
+<p>Some neat things to plot here:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="visualizing-survival-curves.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_sex,<span class="at">conf.int =</span> T,<span class="at">pval=</span>T,<span class="at">risk.table =</span> T,<span class="at">risk.table.col=</span><span class="st">&quot;sex&quot;</span>, <span class="at">legend.labs=</span><span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Female&quot;</span>),<span class="at">risk.table.height =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/neat%20plot-1.png" width="672" /></p>
 
 </div>
             </section>

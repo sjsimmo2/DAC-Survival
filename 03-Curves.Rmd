@@ -61,4 +61,11 @@ You can test if there is a significant difference in the survival curves by:
 survdiff(Surv(time, status==2)~sex, data=lung)
 
 ```
+Some neat things to plot here:
+
+```{r neat plot}
+
+ggsurvplot(lung_sex,conf.int = T,pval=T,risk.table = T,risk.table.col="sex", legend.labs=c("Male","Female"),risk.table.height = 0.4)
+
+```
 
