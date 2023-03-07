@@ -194,6 +194,16 @@ Ok, so now let’s get to the real data:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="visualizing-survival-curves.html#cb7-1" aria-hidden="true" tabindex="-1"></a>lung_sex<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span>sex,                      <span class="at">data =</span> lung)</span>
 <span id="cb7-2"><a href="visualizing-survival-curves.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_sex)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/stratified-1.png" width="672" /></p>
+<p>You can test if there is a significant difference in the survival curves by:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="visualizing-survival-curves.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span>sex, <span class="at">data=</span>lung)</span></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(time, status == 2) ~ sex, data = lung)
+## 
+##         N Observed Expected (O-E)^2/E (O-E)^2/V
+## sex=1 138      112     91.6      4.55      10.3
+## sex=2  90       53     73.4      5.68      10.3
+## 
+##  Chisq= 10.3  on 1 degrees of freedom, p= 0.001</code></pre>
 
 </div>
             </section>

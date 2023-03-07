@@ -54,3 +54,11 @@ ggsurvplot(lung_sex)
 
 ```
 
+You can test if there is a significant difference in the survival curves by:
+
+```{r significance testing}
+
+survdiff(Surv(time, status==2)~sex, data=lung)
+
+```
+
