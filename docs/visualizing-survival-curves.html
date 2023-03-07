@@ -23,7 +23,7 @@
 <meta name="author" content="Dr. Susan Simmons" />
 
 
-<meta name="date" content="2023-03-06" />
+<meta name="date" content="2023-03-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="setting-up-r.html"/>
-
+<link rel="next" href="cox-regression.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,6 +139,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> A brief intro to Survival Analysis</a></li>
 <li class="chapter" data-level="2" data-path="setting-up-r.html"><a href="setting-up-r.html"><i class="fa fa-check"></i><b>2</b> Setting up R</a></li>
 <li class="chapter" data-level="3" data-path="visualizing-survival-curves.html"><a href="visualizing-survival-curves.html"><i class="fa fa-check"></i><b>3</b> Visualizing survival curves</a></li>
+<li class="chapter" data-level="4" data-path="cox-regression.html"><a href="cox-regression.html"><i class="fa fa-check"></i><b>4</b> Cox regression</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -163,9 +164,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s first look at our little survival data (to see how this works) and then we will look at the actual data.<br />
 </p>
 <p>The following code creates the data:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="visualizing-survival-curves.html#cb1-1" aria-hidden="true" tabindex="-1"></a>simple<span class="ot">=</span><span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>),<span class="at">ncol=</span><span class="dv">2</span>))</span>
-<span id="cb1-2"><a href="visualizing-survival-curves.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(simple)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;tenure&quot;</span>,<span class="st">&quot;censored&quot;</span>)</span>
-<span id="cb1-3"><a href="visualizing-survival-curves.html#cb1-3" aria-hidden="true" tabindex="-1"></a>simple</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="visualizing-survival-curves.html#cb7-1" aria-hidden="true" tabindex="-1"></a>simple<span class="ot">=</span><span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>),<span class="at">ncol=</span><span class="dv">2</span>))</span>
+<span id="cb7-2"><a href="visualizing-survival-curves.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(simple)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;tenure&quot;</span>,<span class="st">&quot;censored&quot;</span>)</span>
+<span id="cb7-3"><a href="visualizing-survival-curves.html#cb7-3" aria-hidden="true" tabindex="-1"></a>simple</span></code></pre></div>
 <pre><code>##   tenure censored
 ## 1      7        1
 ## 2      8        1
@@ -174,8 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5      2        1
 ## 6      3        0</code></pre>
 <p>To calculate the survival probabilities, we will use the survfit command.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="visualizing-survival-curves.html#cb3-1" aria-hidden="true" tabindex="-1"></a>simple_km<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(tenure, censored<span class="sc">==</span><span class="dv">1</span>)<span class="sc">~</span><span class="dv">1</span>,                      <span class="at">data =</span> simple)</span>
-<span id="cb3-2"><a href="visualizing-survival-curves.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(simple_km)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="visualizing-survival-curves.html#cb9-1" aria-hidden="true" tabindex="-1"></a>simple_km<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(tenure, censored<span class="sc">==</span><span class="dv">1</span>)<span class="sc">~</span><span class="dv">1</span>,                      <span class="at">data =</span> simple)</span>
+<span id="cb9-2"><a href="visualizing-survival-curves.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(simple_km)</span></code></pre></div>
 <pre><code>## Call: survfit(formula = Surv(tenure, censored == 1) ~ 1, data = simple)
 ## 
 ##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
@@ -184,18 +185,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##     7      3       1    0.444   0.222       0.1668            1
 ##     8      2       1    0.222   0.192       0.0407            1</code></pre>
 <p>Now let’s plot this survival curve.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="visualizing-survival-curves.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(simple_km)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="visualizing-survival-curves.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(simple_km)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/simple%20survival%20curve-1.png" width="672" />
 Ok, so now let’s get to the real data:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="visualizing-survival-curves.html#cb6-1" aria-hidden="true" tabindex="-1"></a>lung_simple<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span><span class="dv">1</span>,                      <span class="at">data =</span> lung)</span>
-<span id="cb6-2"><a href="visualizing-survival-curves.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_simple)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="visualizing-survival-curves.html#cb12-1" aria-hidden="true" tabindex="-1"></a>lung_simple<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span><span class="dv">1</span>,                      <span class="at">data =</span> lung)</span>
+<span id="cb12-2"><a href="visualizing-survival-curves.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_simple)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/simple%20real%20data-1.png" width="672" /></p>
 <p>We can also do a stratified survival curve. To do a stratified analysis, the variables must be categorical!! This is because you are creating a curve for each level of this variable. Let’s take a look at the different survival curves for sex (remember 1 is male and 2 is female).</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="visualizing-survival-curves.html#cb7-1" aria-hidden="true" tabindex="-1"></a>lung_sex<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span>sex,                      <span class="at">data =</span> lung)</span>
-<span id="cb7-2"><a href="visualizing-survival-curves.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_sex)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="visualizing-survival-curves.html#cb13-1" aria-hidden="true" tabindex="-1"></a>lung_sex<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span>sex,                      <span class="at">data =</span> lung)</span>
+<span id="cb13-2"><a href="visualizing-survival-curves.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_sex)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/stratified-1.png" width="672" /></p>
 <p>You can test if there is a significant difference in the survival curves by:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="visualizing-survival-curves.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span>sex, <span class="at">data=</span>lung)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="visualizing-survival-curves.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span>sex, <span class="at">data=</span>lung)</span></code></pre></div>
 <pre><code>## Call:
 ## survdiff(formula = Surv(time, status == 2) ~ sex, data = lung)
 ## 
@@ -205,7 +206,7 @@ Ok, so now let’s get to the real data:</p>
 ## 
 ##  Chisq= 10.3  on 1 degrees of freedom, p= 0.001</code></pre>
 <p>Some neat things to plot here:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="visualizing-survival-curves.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_sex,<span class="at">conf.int =</span> T,<span class="at">pval=</span>T,<span class="at">risk.table =</span> T,<span class="at">risk.table.col=</span><span class="st">&quot;sex&quot;</span>, <span class="at">legend.labs=</span><span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Female&quot;</span>),<span class="at">risk.table.height =</span> <span class="fl">0.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="visualizing-survival-curves.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_sex,<span class="at">conf.int =</span> T,<span class="at">pval=</span>T,<span class="at">risk.table =</span> T,<span class="at">risk.table.col=</span><span class="st">&quot;sex&quot;</span>, <span class="at">legend.labs=</span><span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Female&quot;</span>),<span class="at">risk.table.height =</span> <span class="fl">0.4</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/neat%20plot-1.png" width="672" /></p>
 
 </div>
@@ -214,8 +215,8 @@ Ok, so now let’s get to the real data:</p>
           </div>
         </div>
       </div>
-<a href="setting-up-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="setting-up-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cox-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
