@@ -4,7 +4,7 @@
 library(survival)
 library(ggplot2)
 library(gridExtra)
-
+library(survminer)
 
 ```
 
@@ -30,4 +30,11 @@ simple_km=survfit(Surv(tenure, censored==1)~1,                      data = simpl
 summary(simple_km)
 
 ```
+Now let's plot this survival curve.
+```{r, simple survival curve}
+
+ggsurvplot(simple_km)
+
+```
+Ok, so now let's get to the real data:
 
