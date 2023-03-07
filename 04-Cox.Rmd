@@ -1,0 +1,23 @@
+# Cox regression
+
+
+
+```{r, include =FALSE}
+library(survival)
+library(ggplot2)
+library(gridExtra)
+library(survminer)
+
+```
+
+
+I am not sure if we will get this far (there's a lot to cover in survival curves).  Cox regression is one of the most popular methods of regression in survival analysis.  Remember, we are trying to discover what variables have an impact on the length of time til an event occurs.  \
+
+Cox proportional hazard regression models the hazard rate (not survival probabilities).  The hazard rate is the instantaneous event rate for the risk set at time t.  There is A LOT involved in this modeling, but we will at least demonstrate how to do this:
+
+```{r}
+
+lung_ph= coxph(Surv(time,status==2) ~ sex  + factor(ph.ecog) , data=lung)
+summary(lung_ph)
+```
+

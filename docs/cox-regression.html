@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Survival basics</title>
-  <meta name="description" content="Page not found | Survival basics" />
+  <title>Chapter 4 Cox regression | Survival basics</title>
+  <meta name="description" content="Chapter 4 Cox regression | Survival basics" />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Survival basics" />
+  <meta property="og:title" content="Chapter 4 Cox regression | Survival basics" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Survival basics" />
+  <meta name="twitter:title" content="Chapter 4 Cox regression | Survival basics" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="visualizing-survival-curves.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -159,18 +159,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="cox-regression" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Cox regression<a href="cox-regression.html#cox-regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>I am not sure if we will get this far (there’s a lot to cover in survival curves). Cox regression is one of the most popular methods of regression in survival analysis. Remember, we are trying to discover what variables have an impact on the length of time til an event occurs.<br />
+</p>
+<p>Cox proportional hazard regression models the hazard rate (not survival probabilities). The hazard rate is the instantaneous event rate for the risk set at time t. There is A LOT involved in this modeling, but we will at least demonstrate how to do this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="cox-regression.html#cb1-1" aria-hidden="true" tabindex="-1"></a>lung_ph<span class="ot">=</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status<span class="sc">==</span><span class="dv">2</span>) <span class="sc">~</span> sex  <span class="sc">+</span> <span class="fu">factor</span>(ph.ecog) , <span class="at">data=</span>lung)</span>
+<span id="cb1-2"><a href="cox-regression.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lung_ph)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(time, status == 2) ~ sex + factor(ph.ecog), 
+##     data = lung)
+## 
+##   n= 227, number of events= 164 
+##    (1 observation deleted due to missingness)
+## 
+##                     coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+## sex              -0.5449    0.5799   0.1681 -3.241  0.00119 ** 
+## factor(ph.ecog)1  0.4182    1.5192   0.1994  2.097  0.03602 *  
+## factor(ph.ecog)2  0.9475    2.5792   0.2248  4.216 2.49e-05 ***
+## factor(ph.ecog)3  2.0485    7.7565   1.0269  1.995  0.04605 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##                  exp(coef) exp(-coef) lower .95 upper .95
+## sex                 0.5799     1.7245    0.4171    0.8062
+## factor(ph.ecog)1    1.5192     0.6582    1.0277    2.2459
+## factor(ph.ecog)2    2.5792     0.3877    1.6602    4.0067
+## factor(ph.ecog)3    7.7565     0.1289    1.0366   58.0390
+## 
+## Concordance= 0.642  (se = 0.025 )
+## Likelihood ratio test= 29.5  on 4 df,   p=6e-06
+## Wald test            = 30.7  on 4 df,   p=4e-06
+## Score (logrank) test = 32.71  on 4 df,   p=1e-06</code></pre>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="visualizing-survival-curves.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -202,7 +230,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/sjsimmo2/DAC-Survival/edit/master/%s",
+"link": "https://github.com/sjsimmo2/DAC-Survival/edit/master/04-Cox.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -210,7 +238,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/sjsimmo2/DAC-Survival/blob/master/%s",
+"link": "https://github.com/sjsimmo2/DAC-Survival/blob/master/04-Cox.Rmd",
 "text": null
 },
 "download": null,
