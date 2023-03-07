@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Setting up R | Survival basics</title>
   <meta name="description" content="Chapter 2 Setting up R | Survival basics" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Setting up R | Survival basics" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="a-caucus-race-and-a-long-tale.html"/>
+<link rel="next" href="visualizing-survival-curves.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> A brief intro to Survival Analysis</a></li>
 <li class="chapter" data-level="2" data-path="setting-up-r.html"><a href="setting-up-r.html"><i class="fa fa-check"></i><b>2</b> Setting up R</a></li>
-<li class="chapter" data-level="3" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>3</b> A caucus-race and a long tale</a></li>
+<li class="chapter" data-level="3" data-path="visualizing-survival-curves.html"><a href="visualizing-survival-curves.html"><i class="fa fa-check"></i><b>3</b> Visualizing survival curves</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -166,12 +166,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <strong>install.packages(“survival”)</strong><br />
 <strong>install.packages(“ggplot2”)</strong><br />
 <strong>install.packages(“gridExtra”)</strong><br />
+<strong>install.packages(“survminer”)</strong><br />
 </p>
 <p>You will only need to do this once. Once they have been installed, you now have them on your local drive.</p>
 <p>Now let’s open a new R Markdown notebook. Go to File -&gt; New File -&gt; R Markdown… This will open an R Markdown file for you. Go ahead and run some of the “R Chunks” to see what is going on here. After you are comfortable, let’s change the first chunk to do what we need it to do. We will need to library the survival and ggplot2 package. See below for code to do this. Everytime you open this document, and want to run the codes contained within, you will need to do these commands first.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setting-up-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
 <span id="cb1-2"><a href="setting-up-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-3"><a href="setting-up-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
+<span id="cb1-3"><a href="setting-up-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb1-4"><a href="setting-up-r.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span></code></pre></div>
 <p>Be sure to hit the little green run button in the right hand corner to run this code. Feel free to put comments before or after this chunk to let you know what you just did!!<br />
 </p>
 <p>Now let’s explore the data set we will be using (as any good data scientist, you must KNOW your data first!!). Go ahead and ask for a summary of the data set lung.</p>
@@ -223,7 +225,7 @@ Just a little more exploration (if you are doing an analysis, you should explore
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-caucus-race-and-a-long-tale.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="visualizing-survival-curves.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

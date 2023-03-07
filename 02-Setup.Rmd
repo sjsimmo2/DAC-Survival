@@ -8,6 +8,7 @@ First, in the console, you will need to install the packages onto your local dri
 **install.packages("survival")**  \
 **install.packages("ggplot2")**  \
 **install.packages("gridExtra")**  \
+**install.packages("survminer")**  \
 
 You will only need to do this once.  Once they have been installed, you now have them on your local drive.
 
@@ -18,6 +19,8 @@ Now let's open a new R Markdown notebook.  Go to File -> New File -> R Markdown.
 library(survival)
 library(ggplot2)
 library(gridExtra)
+library(survminer)
+
 
 ```
 
