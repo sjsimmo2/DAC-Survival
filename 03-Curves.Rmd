@@ -38,3 +38,19 @@ ggsurvplot(simple_km)
 ```
 Ok, so now let's get to the real data:
 
+```{r simple real data}
+
+lung_simple=survfit(Surv(time, status==2)~1,                      data = lung)
+ggsurvplot(lung_simple)
+
+```
+
+We can also do a stratified survival curve.  To do a stratified analysis, the variables must be categorical!! This is because you are creating a curve for each level of this variable. Let's take a look at the different survival curves for sex (remember 1 is male and 2 is female). 
+
+```{r stratified}
+
+lung_sex=survfit(Surv(time, status==2)~sex,                      data = lung)
+ggsurvplot(lung_sex)
+
+```
+
