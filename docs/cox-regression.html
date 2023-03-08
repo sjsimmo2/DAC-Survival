@@ -164,8 +164,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>I am not sure if we will get this far (there’s a lot to cover in survival curves). Cox regression is one of the most popular methods of regression in survival analysis. Remember, we are trying to discover what variables have an impact on the length of time til an event occurs.<br />
 </p>
 <p>Cox proportional hazard regression models the hazard rate (not survival probabilities). The hazard rate is the instantaneous event rate for the risk set at time t. There is A LOT involved in this modeling, but we will at least demonstrate how to do this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="cox-regression.html#cb1-1" aria-hidden="true" tabindex="-1"></a>lung_ph<span class="ot">=</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status<span class="sc">==</span><span class="dv">2</span>) <span class="sc">~</span> sex  <span class="sc">+</span> <span class="fu">factor</span>(ph.ecog) , <span class="at">data=</span>lung)</span>
-<span id="cb1-2"><a href="cox-regression.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lung_ph)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="cox-regression.html#cb17-1" aria-hidden="true" tabindex="-1"></a>lung_ph<span class="ot">=</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status<span class="sc">==</span><span class="dv">2</span>) <span class="sc">~</span> sex  <span class="sc">+</span> <span class="fu">factor</span>(ph.ecog) , <span class="at">data=</span>lung)</span>
+<span id="cb17-2"><a href="cox-regression.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lung_ph)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(time, status == 2) ~ sex + factor(ph.ecog), 
 ##     data = lung)
