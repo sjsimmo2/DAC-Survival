@@ -23,7 +23,7 @@
 <meta name="author" content="Dr. Susan Simmons" />
 
 
-<meta name="date" content="2023-03-07" />
+<meta name="date" content="2023-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,11 +191,11 @@ Ok, so now let’s get to the real data:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="visualizing-survival-curves.html#cb6-1" aria-hidden="true" tabindex="-1"></a>lung_simple<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span><span class="dv">1</span>,<span class="at">data =</span> lung)</span>
 <span id="cb6-2"><a href="visualizing-survival-curves.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_simple)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/simple%20real%20data-1.png" width="672" /></p>
-<p>We can also do a stratified survival curve. To do a stratified analysis, the variables must be categorical!! This is because you are creating a curve for each level of this variable. Let’s take a look at the different survival curves for sex (remember 1 is male and 2 is female).</p>
+<p>We can also do a stratified survival curve. To do a stratified analysis, the variable you will stratify on must be categorical!! This is because you are creating a curve for each level of this variable. Let’s take a look at the different survival curves for sex (remember 1 is male and 2 is female).</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="visualizing-survival-curves.html#cb7-1" aria-hidden="true" tabindex="-1"></a>lung_sex<span class="ot">=</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span>sex,<span class="at">data =</span> lung)</span>
 <span id="cb7-2"><a href="visualizing-survival-curves.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(lung_sex)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/stratified-1.png" width="672" /></p>
-<p>You can test if there is a significant difference in the survival curves by:</p>
+<p>You can test if there is a significant difference in the survival curves by (null hypothesis is that there is no difference in the survival curves and the alternative is that there is a significant difference in the survival curves):</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="visualizing-survival-curves.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time, status<span class="sc">==</span><span class="dv">2</span>)<span class="sc">~</span>sex, <span class="at">data=</span>lung)</span></code></pre></div>
 <pre><code>## Call:
 ## survdiff(formula = Surv(time, status == 2) ~ sex, data = lung)

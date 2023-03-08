@@ -45,7 +45,7 @@ ggsurvplot(lung_simple)
 
 ```
 
-We can also do a stratified survival curve.  To do a stratified analysis, the variables must be categorical!! This is because you are creating a curve for each level of this variable. Let's take a look at the different survival curves for sex (remember 1 is male and 2 is female). 
+We can also do a stratified survival curve.  To do a stratified analysis, the variable you will stratify on must be categorical!! This is because you are creating a curve for each level of this variable. Let's take a look at the different survival curves for sex (remember 1 is male and 2 is female). 
 
 ```{r stratified}
 
@@ -54,7 +54,7 @@ ggsurvplot(lung_sex)
 
 ```
 
-You can test if there is a significant difference in the survival curves by:
+You can test if there is a significant difference in the survival curves by (null hypothesis is that there is no difference in the survival curves and the alternative is that there is a significant difference in the survival curves):
 
 ```{r significance testing}
 
