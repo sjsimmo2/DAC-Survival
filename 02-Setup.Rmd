@@ -12,7 +12,7 @@ First, in the console, you will need to install the packages onto your local dri
 
 You will only need to do this once.  Once they have been installed, you now have them on your local drive.
 
-Now let's open a new R Markdown notebook.  Go to File -> New File -> R Markdown...  This will open an R Markdown file for you.  Go ahead and run some of the "R Chunks" to see what is going on here.  After you are comfortable, let's change the first chunk to do what we need it to do.  We will need to library the survival and ggplot2 package.  See below for code to do this.  Everytime you open this document, and want to run the codes contained within, you will need to do these commands first.
+Now let's open a new R Markdown notebook.  Go to File -> New File -> R Markdown...  This will open an R Markdown file for you.  Go ahead and run some of the "R Chunks" to see what is going on here.  After you are comfortable, let's change the first chunk to do what we need it to do.  We will need to library the survival and ggplot2 package, as well as the other packages we will need.  See below for code to do this.  Every time you open this document, and want to run the codes contained within, you will need to do these commands first.
 
 ```{r get libraries,message=FALSE}
 
